@@ -1,0 +1,124 @@
+<FirstPage>:
+    the_random: the_random
+    slid: slider
+    togglik: togglik
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: "horizontal"
+            Button:
+                text: "Draw"
+                on_press: root.new_side()
+            Button:
+                text: "Ball"
+                disabled: True
+        BoxLayout:
+            orientation: "horizontal"
+            Random:
+                id: the_random
+            FloatLayout:
+                size_hint: 0.3, 1
+
+                Slider:
+                    id: slider
+                    min: 0
+                    max: 50
+                    value: 0
+                    size_hint: 0.5, 0.5
+                    pos_hint: {"center_x":0.5, "y": .05}
+                    orientation: "vertical"
+                    value_track: True
+                    value_track_color: [0, .3, .7, 1]
+                
+                Label:
+                    text: str(int(slider.value))
+                    pos_hint: {"center_x":0.5, "y": .1}
+                    font_size: dp(30)
+
+                Button:
+                    text: "restart"
+                    on_press: root.restart()
+                    pos_hint: {"center_x":0.5, "y": .85}
+                    size_hint: 0.7, 0.1
+                
+                ToggleButton:
+                    id: togglik
+                    size_hint: None, None
+                    size: 96, 96
+                    allow_strech: True
+                    pos_hint: {"center_x":0.5, "y": 0.71}
+                    background_normal: "images2/sound.png"
+                    background_down: "images2/no_sound.png"
+                    
+
+
+<SecondPage>:
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: "horizontal"
+            Button:
+                text: "Draw"
+                disabled: True
+            Button:
+                text: "Ball"
+                on_press: root.new_side()
+        BoxLayout:
+            orientation: "horizontal"
+            Random2:
+                width_of_line: slid2
+                id: rand2
+                size_hint: 0.7, 1
+                toggle_button: toggle
+                button_name_id: button_name
+
+            FloatLayout:
+                id: float
+                size_hint: 0.3, 1
+
+                Widget:
+                    size_hint: self.size_hint
+                    pos_hint: {"x":0, "y":0}
+                    canvas:
+                        Color:
+                            rgba: 0.5, 0.5, 0.5, 1
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                Button:
+                    text: "Clear"
+                    pos_hint: {"center_x":0.5, "y": 0.825}
+                    size_hint: 0.6, 0.065
+                    on_press: rand2.clear()
+                
+                Button:
+                    id: button_name
+                    text: rand2.name_color
+                    on_press: rand2.change_color()
+                    pos_hint: {"center_x":0.5, "y":0.92}
+                    size_hint: 0.45, 0.05
+                    color: (1, 1, 1, 1)
+                
+                ToggleButton:
+                    id: toggle
+                    text: "rubber"
+                    pos_hint: {"center_x": 0.5, "y": 0.75}
+                    size_hint: 0.4, 0.05
+                    on_state: rand2.rubber_cleaner(self)
+                    font_size: dp(11)
+                
+                Slider:
+                    id: slid2
+                    orientation: "vertical"
+                    min: 2
+                    max: 100
+                    size_hint: 0.5, 0.5
+                    pos_hint: {"center_x":0.5, "y": 0.05}
+                
+                Label:
+                    text: f"size: {int(slid2.value)}"
+                    pos_hint: {"center_x":0.5, "y":0.17}
+                    font_size: dp(25)
